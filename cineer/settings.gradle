@@ -1,0 +1,2 @@
+rootProject.name='cineer'
+include ':app'
