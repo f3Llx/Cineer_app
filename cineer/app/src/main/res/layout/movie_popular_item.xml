@@ -53,6 +53,7 @@
             android:layout_height="match_parent"
             android:foreground="?android:attr/selectableItemBackground"
             android:maxHeight="200dp"
+            android:minHeight="200dp"
             android:scaleType="centerCrop"
             android:tintMode="src_over"
             app:srcCompat="@drawable/placeholder" />

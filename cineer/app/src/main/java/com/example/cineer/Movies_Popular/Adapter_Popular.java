@@ -4,6 +4,7 @@ package com.example.cineer.Movies_Popular;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
+        import android.view.animation.AnimationUtils;
         import android.widget.ImageView;
         import android.widget.RatingBar;
         import android.widget.TextView;
@@ -53,6 +54,7 @@ public class Adapter_Popular extends RecyclerView.Adapter<Adapter_Popular.Exampl
             mBundle.putInt("movie_id", (int) currentItem.getId());
             intent.putExtras(mBundle);
             v.getContext().startActivity(intent);
+
         });
     }
     @Override
