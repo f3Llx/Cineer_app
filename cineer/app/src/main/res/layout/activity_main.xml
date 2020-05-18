@@ -3,32 +3,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    tools:context=".MainActivity"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorPrimary"
+    tools:context=".MainActivity">
 
     <FrameLayout
         android:id="@+id/My_Container_1_ID"
         android:layout_width="fill_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:background="@color/colorPrimary">
+
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/My_Container_2_ID"
         android:layout_width="fill_parent"
-        android:layout_height="150dp"
-        android:layout_alignParentLeft="true"
+        android:layout_height="470dp"
         android:layout_below="@+id/My_Container_1_ID"
-        android:background="@color/colorPrimary" >
-    </FrameLayout>
+        android:layout_alignParentLeft="true"
+        android:background="@color/colorPrimary"></FrameLayout>
 
     <FrameLayout
         android:id="@+id/My_Container_3_ID"
         android:layout_width="fill_parent"
-        android:layout_height="150dp"
-        android:layout_alignParentLeft="true"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/My_Container_2_ID"
-        android:background="@color/colorPrimary" >
-    </FrameLayout>
+        android:layout_alignParentLeft="true"
+        android:background="@color/colorPrimary"></FrameLayout>
 
 </RelativeLayout>
