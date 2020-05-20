@@ -6,8 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.widget.AbsListView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,6 +44,8 @@ public class Fragment_Popular extends Fragment {
         page = 1;
         //animation
         mRecyclerview.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.slide_up));
+        ImageView info = view.findViewById(R.id.info_blink);
+        info.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.blink));
         //page up click listener
         pageup.setOnClickListener(v -> {
             page++;
@@ -47,6 +53,7 @@ public class Fragment_Popular extends Fragment {
             pageCount.setText(page+"");
             //animation
             mRecyclerview.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
+
         });
         //page down click listener
         pagedown.setOnClickListener(v -> {
@@ -58,9 +65,40 @@ public class Fragment_Popular extends Fragment {
                 pageCount.setText(page+"");
                 //animation
                 mRecyclerview.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
+
             }
         });
         getPopularMovies(page);
+
+        mRecyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0) {
+
+                } else {
+
+                }
+            }
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_FLING) {
+
+                } else if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+                    //info.setVisibility(View.INVISIBLE);
+                    info.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_out));
+
+                } else {
+
+                }
+            }
+        });
+
+
         return view;
     }
     private void getPopularMovies(int page) {

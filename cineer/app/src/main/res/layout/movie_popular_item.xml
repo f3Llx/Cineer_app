@@ -50,13 +50,13 @@
         <ImageView
             android:id="@+id/movie_popular_poster"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
             android:foreground="?android:attr/selectableItemBackground"
-            android:maxHeight="200dp"
-            android:minHeight="200dp"
+            android:maxHeight="300dp"
+            android:minHeight="300dp"
             android:scaleType="centerCrop"
-            android:tintMode="src_over"
-            app:srcCompat="@drawable/placeholder" />
+            android:tintMode="src_over" />
 
     </androidx.cardview.widget.CardView>
 

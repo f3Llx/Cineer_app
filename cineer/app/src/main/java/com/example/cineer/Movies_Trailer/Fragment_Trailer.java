@@ -17,7 +17,6 @@ public class Fragment_Trailer extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_trailers, container, false);
        loadTrailer(view,"TcMBFSGVi1c");
-
         return view;
 
 
