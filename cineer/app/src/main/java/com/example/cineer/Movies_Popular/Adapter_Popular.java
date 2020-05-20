@@ -17,7 +17,7 @@ package com.example.cineer.Movies_Popular;
 
 public class Adapter_Popular extends RecyclerView.Adapter<Adapter_Popular.ExampleViewHolder> {
     private ArrayList<Movies_popular_results> mExampleList;
-    static class ExampleViewHolder extends RecyclerView.ViewHolder {
+    public static class ExampleViewHolder extends RecyclerView.ViewHolder {
         ImageView poster;
         TextView movie_tittle;
         RatingBar ratingBar;
