@@ -14,7 +14,7 @@ public class Movies_Popular_Details {
     String title;
     String tagline;
     String overview;
-    int popularity;
+    float popularity;
     String release_date;
     int runtime;
     String poster_path;
@@ -106,7 +106,7 @@ public class Movies_Popular_Details {
         this.overview = overview;
     }
 
-    public int getPopularity() {
+    public float getPopularity() {
         return popularity;
     }
 

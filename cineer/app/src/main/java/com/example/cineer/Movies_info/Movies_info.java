@@ -1,28 +1,15 @@
 package com.example.cineer.Movies_info;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import com.example.cineer.Json_api_interface;
-import com.example.cineer.Movies_Popular.Adapter_Popular;
-import com.example.cineer.Movies_Popular.Movies_popular;
-import com.example.cineer.Movies_Popular.Movies_popular_results;
 import com.example.cineer.R;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,7 +23,7 @@ public class Movies_info extends AppCompatActivity {
     private TextView tv_title, tv_subtitle, budget, homepage, original_languaje, original_title, overview, release_date, runtime;
     private Movies_Popular_Details moviesPopularDetails;
     int movie_id;
-    private Adapter_detalle adapterDetalle;
+
 
     private Retrofit retrofit;
     private RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -46,17 +33,15 @@ public class Movies_info extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movies_info);
-
         Intent intent_get= getIntent();
         Bundle bundle = intent_get.getExtras();
-
         if(bundle!=null)
         {
             movie_id =(int) bundle.get("movie_id");
         }
 
-        setUpView();
         lanzarPeticion();
+
     }
 
     private void setUpView(){
@@ -71,28 +56,31 @@ public class Movies_info extends AppCompatActivity {
         release_date = findViewById(R.id.release_date);
         runtime = findViewById(R.id.runtime);
 
-        rv_Detalle = findViewById(R.id.rv_Detalle);
-        adapterDetalle = new Adapter_detalle(moviesPopularDetails);
-        rv_Detalle.setAdapter(adapterDetalle);
+
 
     }
 
     private void lanzarPeticion (){
         String apikey = "20da572d6d158a453c70756fd8f11ed0";
-        retrofit =  new Retrofit.Builder().baseUrl("https://api.themoviedb.org/3/movie/" + movie_id + "/").addConverterFactory(GsonConverterFactory.create()).build();
+        retrofit =  new Retrofit.Builder().baseUrl("https://api.themoviedb.org/3/").addConverterFactory(GsonConverterFactory.create()).build();
         Json_api_interface jsonApiInterface = retrofit.create(Json_api_interface.class);
 
-        Call<Movies_Popular_Details> call = jsonApiInterface.getmovieDetails(apikey);
+        Call<Movies_Popular_Details> call = jsonApiInterface.getmovieDetails(454626,apikey);
         call.enqueue(new Callback<Movies_Popular_Details>() {
             @Override
             public void onResponse(Call<Movies_Popular_Details> call, Response<Movies_Popular_Details> response) {
                 Movies_Popular_Details moviesPopularDetails = response.body();
-                moviesPopularDetails.getBudget();
+                setUpView();
+                //para recuperar la info la sacas usando moviesPopularDetails.get etc.... :)
+                budget.setText(moviesPopularDetails.getBudget()+"");
+
+
             }
 
             @Override
             public void onFailure(Call<Movies_Popular_Details> call, Throwable t) {
-                Log.d("RETROFIT", "Error " + t.getMessage());
+                Log.e("RETROFIT", "Error " + t.getMessage());
+                Toast.makeText(Movies_info.this, "fallo"+t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
