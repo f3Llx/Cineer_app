@@ -1,7 +1,5 @@
 package com.example.cineer.Movies_info;
 
-import com.example.cineer.Movies_info.Genres;
-
 import java.util.List;
 
 public class Movies_Popular_Details {
@@ -19,8 +17,17 @@ public class Movies_Popular_Details {
     int runtime;
     String poster_path;
     Movies_Review review;
+    String backdrop_path;
 
-    public Movies_Popular_Details(int budget, List<Genres> genres, String homepage, String original_language, String original_title, String title, String tagline, String overview, float popularity, String release_date, int runtime, String poster_path, Movies_Review review) {
+    public String getBackdrop_path() {
+        return backdrop_path;
+    }
+
+    public void setBackdrop_path(String backdrop_path) {
+        this.backdrop_path = backdrop_path;
+    }
+
+    public Movies_Popular_Details(int budget, List<Genres> genres, String homepage, String original_language, String original_title, String title, String tagline, String overview, float popularity, String release_date, int runtime, String poster_path, Movies_Review review,String backdrop_path) {
         this.budget = budget;
         this.genres = genres;
         this.homepage = homepage;
@@ -34,6 +41,7 @@ public class Movies_Popular_Details {
         this.runtime = runtime;
         this.poster_path = poster_path;
         this.review = review;
+        this.backdrop_path=backdrop_path;
     }
     public Movies_Review getReview() {
         return review;

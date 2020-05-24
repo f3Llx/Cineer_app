@@ -1,20 +1,15 @@
 package com.example.cineer.Movies_info;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.cineer.Json_api_interface;
 import com.example.cineer.R;
 import com.squareup.picasso.Picasso;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -52,7 +47,7 @@ public class Movies_info extends AppCompatActivity {
     }
 
     private void setUpView(){
-        iv = findViewById(R.id.imageView);
+        iv = findViewById(R.id.poster_details);
         tv_title = findViewById(R.id.tv_Title);
         tv_subtitle = findViewById(R.id.tv_Tagline);
         budget = findViewById(R.id.budget);
@@ -92,18 +87,12 @@ public class Movies_info extends AppCompatActivity {
                 overview.setText(moviesPopularDetails.getOverview()+"");
                 release_date.setText(moviesPopularDetails.getRelease_date()+"");
                 runtime.setText(moviesPopularDetails.getRuntime()+"");
-
-                //INTENTOS FALLIDOS DE PASAR LA IMAGEN
-                iv.setImageDrawable(Drawable.createFromPath(moviesPopularDetails.getPoster_path()+""));
-
-                Picasso.get().load(moviesPopularDetails.getPoster_path()).into(iv);
-
-                Picasso.get()
-                        .load(moviesPopularDetails.getPoster_path())
-                        .noPlaceholder()
-                        .into(iv);
+                //INTENTOS FALLIDOS DE PASAR LA IMAGEN (arreglado)
+               Picasso.get()
+                       .load("https://image.tmdb.org/t/p/w500/"+moviesPopularDetails.getBackdrop_path())
+                       .noPlaceholder().fit().centerCrop()
+                      .into(iv);
             }
-
             @Override
             public void onFailure(Call<Movies_Popular_Details> call, Throwable t) {
                 Log.e("RETROFIT", "Error " + t.getMessage());
@@ -124,7 +113,6 @@ public class Movies_info extends AppCompatActivity {
             public void onResponse(Call<Movies_Review> call, Response<Movies_Review> response) {
                 Movies_Review moviesReview = response.body();
                 setUpReiew();
-
                 author.setText(moviesReview.getAuthor()+"");
                 content.setText(moviesReview.getContent() + "");
                 url.setText(moviesReview.getUrl()+"");
