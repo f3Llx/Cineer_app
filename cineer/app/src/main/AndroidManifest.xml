@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Movies_Trailer.Trailer_dialog_activity"  android:theme="@style/Theme.dialogdabbing"></activity>
         <activity android:name=".Movies_info.Movies_info" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" android:theme="@style/SplashTheme">>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
