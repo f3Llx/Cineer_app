@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.cineer.Movies_Popular.Fragment_Popular;
 import com.example.cineer.Movies_Search.Fragment_Search;
@@ -30,5 +33,7 @@ public class MainActivity extends AppCompatActivity {
         transaction.add(R.id.My_Container_3_ID, fragment_trailer, "Frag_Bottom_tag");
 
         transaction.commit();
+
+
     }
 }

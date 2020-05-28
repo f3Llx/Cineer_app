@@ -1,5 +1,7 @@
 package com.example.cineer;
 import com.example.cineer.Movies_Popular.Movies_popular;
+import com.example.cineer.Movies_Search.Movie_search;
+import com.example.cineer.Movies_Search.Movie_search;
 import com.example.cineer.Movies_Trailer.Movies_upcoming.Movies_upcoming;
 import com.example.cineer.Movies_Trailer.Movies_upcoming.Movies_upcoming_detail;
 import com.example.cineer.Movies_info.Movies_Popular_Details;
@@ -34,5 +36,9 @@ public interface Json_api_interface {
     //peticion peliculas trailers
     @GET("movie/{movie_id}")
     Call<Movies_upcoming_detail> getUpcomingMovieDetails(@Path("movie_id") int id, @Query("api_key") String key,@Query("append_to_response") String videos);
+
+    //peticion busqueda de peliculas
+    @GET("search/movie")
+    Call<Movie_search> getsearch(@Query("query") String query,@Query("api_key") String key);
 
 }
