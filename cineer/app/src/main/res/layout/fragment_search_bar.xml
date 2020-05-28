@@ -11,6 +11,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search"
+            android:textColor="@color/secondaryLightColor"
+            app:layout_constraintBottom_toBottomOf="@+id/searchView3"
+            app:layout_constraintEnd_toStartOf="@+id/searchView3"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/searchView3" />
+
         <ProgressBar
             android:id="@+id/progressBar_search"
             style="?android:attr/progressBarStyle"
