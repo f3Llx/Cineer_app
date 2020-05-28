@@ -105,16 +105,12 @@ public class Trailer_dialog_activity extends AppCompatActivity {
                         .load("https://image.tmdb.org/t/p/w500/"+locations.getBackdrop_path())
                         .fit()
                         .into(getPoster, new com.squareup.picasso.Callback() {
-
                             @Override
                             public void onSuccess() {
                                 backdrop.setBackgroundDrawable(getPoster.getDrawable());
-
                             }
-
                             @Override
                             public void onError(Exception e) {
-
                             }
                         });
 

@@ -1,11 +1,16 @@
 package com.example.cineer.Movies_Search;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -27,34 +32,56 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Fragment_Search extends Fragment {
-
     private Retrofit retrofit = new Retrofit.Builder().baseUrl("https://api.themoviedb.org/3/").addConverterFactory(GsonConverterFactory.create()).build();
     private Json_api_interface json_api_interface = retrofit.create(Json_api_interface.class);
-
     RecyclerView recicler;
     SearchView search;
     View view;
-    private RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+    TextView results;
+    View results_line;
+    ProgressBar searchProgressbar;
+ Boolean isSearching;
+    private RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-         view = inflater.inflate(R.layout.fragment_search_bar, container, false);
-
+        view = inflater.inflate(R.layout.fragment_search_bar, container, false);
         search = view.findViewById(R.id.searchView3);
-        recicler = view.findViewById(R.id.recicler);
-
+        recicler = view.findViewById(R.id.rv_comms);
+        results=view.findViewById(R.id.results_num);
+        results_line=view.findViewById(R.id.results_line);
+        results.setVisibility(View.GONE);
+        results_line.setVisibility(View.GONE);
+        searchProgressbar=view.findViewById(R.id.progressBar_search);
+ isSearching=false;
         //Actualizar la barra de busqueda
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-
                 return false;
             }
+
             @Override
             public boolean onQueryTextChange(String s) {
                 //todo aqui va la busqueda
+                if (!s.equals("")) {
+                    recicler.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.blink_once));
+                    recicler.setVisibility(View.VISIBLE);
+                    onsearch(s);
+                    if(!isSearching){
+                        searchProgressbar.setVisibility(View.VISIBLE);
+                        isSearching=true;
+                    }
 
+                }else{
+                    recicler.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.anim_dissapear));
+                    Handler handler = new Handler();
+                    handler.postDelayed(() -> recicler.setVisibility(View.GONE), 500);
+                    results.setVisibility(View.GONE);
+                    results_line.setVisibility(View.GONE);
+                    searchProgressbar.setVisibility(View.GONE);
+                    isSearching=false;
 
-                onsearch(s);
+                }
                 return false;
             }
         });
@@ -70,12 +97,25 @@ public class Fragment_Search extends Fragment {
             public void onResponse(Call<Movie_search> call, Response<Movie_search> response) {
                 Movie_search busqueda = response.body();
                 List<Movies_results> movies = busqueda.getResults();
-                Toast.makeText(getContext(), "FUNCIONA"+ movies.get(0).getTitle(), Toast.LENGTH_SHORT).show();
+
+
+                if (!movies.isEmpty()) {
+                    recicler.setHasFixedSize(false);
+                    RecyclerView.Adapter mAdapter = new SearchAdapter((ArrayList<Movies_results>) movies);
+                    recicler.setLayoutManager(mLayoutManager);
+                    recicler.setAdapter(mAdapter);
+                    results.setVisibility(View.VISIBLE);
+                    results_line.setVisibility(View.VISIBLE);
+                    if (movies.size()>=5){
+                        results.setText("Results: "+5);
+                    }else{
+                        results.setText("Results: "+movies.size());
+                    }
+
+
+                }
                 //recycler view/adapter
-                recicler.setHasFixedSize(false);
-                RecyclerView.Adapter mAdapter = new SearchAdapter((ArrayList<Movies_results>) movies );
-                recicler.setLayoutManager(mLayoutManager);
-                recicler.setAdapter(mAdapter);
+
             }
 
             @Override

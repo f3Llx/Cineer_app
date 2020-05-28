@@ -22,6 +22,7 @@ public class Adapter_Popular extends RecyclerView.Adapter<Adapter_Popular.Exampl
         TextView movie_tittle;
         RatingBar ratingBar;
 
+
         ExampleViewHolder(View itemView) {
             super(itemView);
             poster = itemView.findViewById(R.id.movie_popular_poster);
