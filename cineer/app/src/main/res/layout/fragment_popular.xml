@@ -38,10 +38,12 @@
         android:id="@+id/page_down"
         android:layout_width="35dp"
         android:layout_height="35dp"
+        android:layout_marginEnd="3dp"
         android:backgroundTint="@color/colorPrimary"
         android:maxHeight="10dp"
         android:tint="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/page_count"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:srcCompat="@drawable/ic_chevron_left_black_24dp" />
 
@@ -72,7 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="334dp" />
+        app:layout_constraintGuide_begin="325dp" />
 
     <ImageView
         android:id="@+id/info_blink"
