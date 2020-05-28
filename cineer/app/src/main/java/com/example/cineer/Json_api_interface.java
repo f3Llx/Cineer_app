@@ -5,7 +5,7 @@ import com.example.cineer.Movies_Search.Movie_search;
 import com.example.cineer.Movies_Trailer.Movies_upcoming.Movies_upcoming;
 import com.example.cineer.Movies_Trailer.Movies_upcoming.Movies_upcoming_detail;
 import com.example.cineer.Movies_info.Movies_Popular_Details;
-import com.example.cineer.Movies_info.Movies_Review;
+import com.example.cineer.Movies_info.Review_List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -26,7 +26,7 @@ public interface Json_api_interface {
 
     //peticion review de peliculas
     @GET("movie/{movie_id}/reviews")
-    Call<Movies_Review> getReviews(@Path("movie_id") int id, @Query("api_key") String key);
+    Call<Review_List> getReviews(@Path("movie_id") int id, @Query("api_key") String key);
 
 
     //peticion peliculas upcoming
