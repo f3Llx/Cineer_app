@@ -44,7 +44,6 @@
         android:tint="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/page_count"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:srcCompat="@drawable/ic_chevron_left_black_24dp" />
 
     <ImageButton
@@ -61,20 +60,13 @@
         android:id="@+id/page_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="3dp"
         android:text="1"
         android:textColor="#8FFFFFFF"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/page_down"
         app:layout_constraintEnd_toStartOf="@+id/page_up"
-        app:layout_constraintStart_toEndOf="@+id/page_down"
         app:layout_constraintTop_toTopOf="@+id/page_down" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="325dp" />
 
     <ImageView
         android:id="@+id/info_blink"
